@@ -11,7 +11,7 @@ import torch.nn as nn
 from ultralytics.nn.modules import *
 from ultralytics.nn.modules.ADown import *
 
-
+from ultralytics.nn.modules.WTConv import *
 
 
 from ultralytics.nn.extra_modules import *
@@ -773,7 +773,7 @@ def parse_model(d, ch, verbose=True, warehouse_manager=None):  # model_dict, inp
                  C2f_SHSA, C2f_SHSA_CGLU, C2f_SMAFB, C2f_SMAFB_CGLU, CSP_MutilScaleEdgeInformationEnhance, C2f_FFCM, C2f_SFHF, CSP_FreqSpatial,
                  C2f_MSM, CSP_MutilScaleEdgeInformationSelect, C2f_HDRAB, C2f_RAB, LFEC3, C2f_FCA, C2f_CAMixer, MANet, MANet_FasterBlock, MANet_FasterCGLU,
                  MANet_Star, C2f_HFERB, C2f_DTAB, C2f_JDPM, C2f_ETB, C2f_FDT, PSConv, C2f_AP, C2f_ELGCA, C2f_ELGCA_CGLU, C2f_Strip, C2f_StripCGLU,
-                 C2f_KAT, C2f_Faster_KAN, C2f_DCMB, C2f_DCMB_KAN, C2f_GlobalFilter, C2f_DynamicFilter, RepHMS, ADown):
+                 C2f_KAT, C2f_Faster_KAN, C2f_DCMB, C2f_DCMB_KAN, C2f_GlobalFilter, C2f_DynamicFilter, RepHMS, ADown, RepC3_WTConv):
             if args[0] == 'head_channel':
                 args[0] = d[args[0]]
             c1, c2 = ch[f], args[0]
@@ -802,7 +802,7 @@ def parse_model(d, ch, verbose=True, warehouse_manager=None):  # model_dict, inp
                      C2f_MSMHSA_CGLU, CSP_PMSFA, C2f_MogaBlock, C2f_SHSA, C2f_SHSA_CGLU, C2f_SMAFB, C2f_SMAFB_CGLU, CSP_MutilScaleEdgeInformationEnhance,
                      C2f_FFCM, C2f_SFHF, CSP_FreqSpatial, C2f_MSM, CSP_MutilScaleEdgeInformationSelect, C2f_HDRAB, C2f_RAB, LFEC3, C2f_FCA, C2f_CAMixer, MANet,
                      MANet_FasterBlock, MANet_FasterCGLU, MANet_Star, C2f_HFERB, C2f_DTAB, C2f_JDPM, C2f_ETB, C2f_FDT, C2f_AP, C2f_ELGCA, C2f_ELGCA_CGLU, 
-                     C2f_Strip, C2f_StripCGLU, C2f_KAT, C2f_Faster_KAN, C2f_DCMB, C2f_DCMB_KAN, C2f_GlobalFilter, C2f_DynamicFilter):
+                     C2f_Strip, C2f_StripCGLU, C2f_KAT, C2f_Faster_KAN, C2f_DCMB, C2f_DCMB_KAN, C2f_GlobalFilter, C2f_DynamicFilter, RepC3_WTConv):
                 args.insert(2, n)  # number of repeats
                 n = 1
         elif m in (AIFI, AIFI_LPE, TransformerEncoderLayer_LocalWindowAttention, TransformerEncoderLayer_DAttention, TransformerEncoderLayer_HiLo, 
